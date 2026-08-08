@@ -32,7 +32,8 @@ By analysing which sensors detect an object within range, the microcontroller de
 
 The implemented hardware prototype consists of the STM32 Nucleo-F446RE microcontroller, ultrasonic sensor, I2C LCD, breadboard, jumper wires, and supporting components.
 
-![Child Adult Detection System Hardware](images/project-hardware.jpg)
+<img width="960" height="1280" alt="prathana project" src="https://github.com/user-attachments/assets/9a987886-44f2-4b3e-ac5c-0fd97b1de87e" />
+
 
 ---
 

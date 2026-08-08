@@ -1,18 +1,18 @@
-### CHILD / ADULT DETECTION SYSTEM
-## 1. Abstract
+## CHILD / ADULT DETECTION SYSTEM
+### 1. Abstract
 
 This project presents an embedded system capable of distinguishing between a child and an adult entering a designated zone using two HC-SR04 ultrasonic sensors, an I2C LCD display, and an active buzzer — all interfaced with the STM32 Nucleo-F446RE microcontroller.
 
 The system uses sensor height profiling to classify the detected individual and provides real-time visual feedback on the LCD along with an audible alert when a child is detected. It is suitable for safety-critical environments such as industrial zones, machinery areas, and restricted spaces.
 
-## 2. Objectives
+### 2. Objectives
 Detect presence of a person entering a monitored area using ultrasonic ranging.
 Classify the detected person as a child or adult based on sensor height profiling.
 Display real-time detection status on a 16x2 I2C LCD.
 Trigger an active buzzer alert when a child is detected.
 Implement hardware-accurate microsecond timing using TIM1 for reliable sensor operation.
 Design a modular, maintainable codebase using STM32 HAL drivers.
-3. System Overview
+### 3. System Overview
 
 The system uses two HC-SR04 ultrasonic sensors placed at different heights:
 
@@ -20,13 +20,14 @@ Lower sensor: approximately 60 cm (child height)
 Upper sensor: approximately 150 cm (adult chest height)
 
 By analysing which sensors detect an object within range, the microcontroller determines whether the person is a child or adult.
+<img width="960" height="1280" alt="prathana project" src="https://github.com/user-attachments/assets/cd613665-b9e3-4093-b295-914352df8b53" />
 
 3.1 Detection Logic
 Lower Sensor	Upper Sensor	Classification	Buzzer
 Triggered (<40 cm)	No detection (>80 cm)	CHILD DETECTED	ON
 Triggered (<40 cm)	Triggered (<80 cm)	ADULT DETECTED	OFF
 No detection	No detection	NO PERSON	OFF
-4. Components
+### 4. Components
 Component	Qty	Purpose
 STM32 Nucleo-F446RE	1	Main microcontroller (Cortex-M4, 84 MHz)
 HC-SR04 Ultrasonic Sensor	2	Distance measurement at two heights
@@ -35,7 +36,7 @@ Active Buzzer	1	Audible alert for child detection
 1 kΩ Resistor	2	Voltage divider for ECHO pin protection
 2 kΩ Resistor	2	Voltage divider (5V to 3.3V)
 Breadboard + Jumper Wires	1 set	Circuit prototyping
-5. Hardware Connections
+### 5. Hardware Connections
 5.1 STM32 Pin Assignment
 STM32 Pin	Connected To	Direction
 PA1	Lower sensor TRIG	Output
@@ -59,7 +60,7 @@ Produces approximately 3.33V at the STM32 pin
 
 Connecting ECHO directly without this divider risks permanent damage to the microcontroller.
 
-6. Software Design
+### 6. Software Design
 6.1 Peripherals Configured
 I2C1 — 100 kHz standard mode, PB6/PB7, for LCD communication
 TIM1 — Internal clock, Prescaler = 83, 1 µs per tick at 84 MHz for ultrasonic timing
@@ -84,19 +85,19 @@ ADULT DETECTED
 NO PERSON
 Set or reset buzzer PA5 based on classification.
 Repeat every 400 ms.
-7. Expected Results
+### 7. Expected Results
 Scenario	LCD Row 1	LCD Row 2	Buzzer
 Child walks in (lower only)	CHILD DETECTED	!! DANGER !!	ON
 Adult walks in (both sensors)	ADULT DETECTED	SAFE	OFF
 No person in range	NO PERSON	Blank	OFF
 System startup	SYSTEM READY	—	OFF
-8. Applications
+### 8. Applications
 Industrial safety zones — alert when a child enters hazardous machinery areas
 School or daycare access control — monitor entry points
 Home automation — differentiate children from adults for smart device control
 Elevator safety systems — detect child presence for special operating modes
 Retail environments — age-based access restriction to certain sections
-9. Conclusion
+### 9. Conclusion
 
 This project successfully demonstrates a low-cost, real-time child/adult detection system using the STM32 Nucleo-F446RE microcontroller and standard off-the-shelf components.
 
